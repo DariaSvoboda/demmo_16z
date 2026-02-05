@@ -2,6 +2,8 @@ package com.example.demmo.dto;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "person")
@@ -15,6 +17,9 @@ public class Person {
     private String lastname;
     private LocalDate birthday;
 
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Message> messages = new ArrayList<>();
+
     public Person() {}
 
     public Person(String firstname, String surname, String lastname, LocalDate birthday) {
@@ -23,7 +28,6 @@ public class Person {
         this.lastname = lastname;
         this.birthday = birthday;
     }
-
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -39,4 +43,24 @@ public class Person {
 
     public LocalDate getBirthday() { return birthday; }
     public void setBirthday(LocalDate birthday) { this.birthday = birthday; }
+
+    public List<Message> getMessages() { return messages; }
+    public void setMessages(List<Message> messages) { this.messages = messages; }
+
+    public void addMessage(Message message) {
+        message.setPerson(this);
+        messages.add(message);
+    }
+
+    public void removeMessage(Message message) {
+        messages.remove(message);
+        message.setPerson(null);
+    }
+
+    public Message findMessageById(int messageId) {
+        return messages.stream()
+                .filter(m -> m.getId() == messageId)
+                .findFirst()
+                .orElse(null);
+    }
 }

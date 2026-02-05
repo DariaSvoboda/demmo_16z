@@ -1,3 +1,7 @@
 2026-02-02 00:55:26.746355+03:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PERSON" not found (this database is empty); SQL statement:
 INSERT INTO person (firstname, surname, lastname, birthday) VALUES ('Ульяна', 'Александровна', 'Кабунина', '2007-07-11') [42104-240]
+2026-02-02 20:07:21.930515+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]DESCRIBE MESSAGE"; ожидалось "DELETE, DROP"
+Syntax error in SQL statement "[*]DESCRIBE MESSAGE"; expected "DELETE, DROP"; SQL statement:
+DESCRIBE MESSAGE [42001-240]

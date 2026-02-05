@@ -30,7 +30,6 @@ public class MessageController {
 
     @PostMapping("/message")
     public ResponseEntity<Message> addMessage(@RequestBody Message message) {
-
         if (message.getTime() == null) {
             message.setTime(LocalDateTime.now());
         }
@@ -40,13 +39,11 @@ public class MessageController {
 
     @PutMapping("/message/{id}")
     public ResponseEntity<Message> updateMessage(@PathVariable int id, @RequestBody Message updatedMessage) {
-
         if (!repository.existsById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         updatedMessage.setId(id);
-
         Message savedMessage = repository.save(updatedMessage);
         return new ResponseEntity<>(savedMessage, HttpStatus.OK);
     }
