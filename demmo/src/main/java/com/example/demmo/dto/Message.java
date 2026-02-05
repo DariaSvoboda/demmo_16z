@@ -2,7 +2,7 @@ package com.example.demmo.dto;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "message")
 public class Message {
@@ -16,6 +16,7 @@ public class Message {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")
+    @JsonBackReference
     private Person person;
 
     public Message() {}
